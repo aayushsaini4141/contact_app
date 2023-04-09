@@ -19,6 +19,7 @@ function App() {
 
   const addNewContact = (e) => {
     e.preventDefault();
+    setSearchResults([]);
     if (isEditing) {
       var updatedContacts = contacts.map((con) => {
         if (con.id === id) {
@@ -33,6 +34,9 @@ function App() {
     } else {
       setContacts([...contacts, { id: contacts.length + 1, name, contact }]);
     }
+    setName("");
+    setId();
+    setContact("");
   };
 
   const editContact = (contact) => {
@@ -43,6 +47,7 @@ function App() {
   };
 
   const deleteContact = (contact) => {
+    setSearchResults([]);
     var updatedContacts = contacts.filter((con) => con.id !== contact.id);
     setContacts(updatedContacts);
   };
