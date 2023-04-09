@@ -32,6 +32,10 @@ function App() {
       setContacts(updatedContacts);
       setIsEditing(false);
     } else {
+      //add the logic here
+      //find index of contact==input contact
+      //if(index !== -1) return
+      //else setContact chala de 
       setContacts([...contacts, { id: contacts.length + 1, name, contact }]);
     }
     setName("");
