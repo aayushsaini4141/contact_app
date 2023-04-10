@@ -8,6 +8,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isErr, setIsErr] = useState(false);
 
   const [contacts, setContacts] = useState([
     { id: 1, name: "Priyanshu", contact: "7017413590" },
@@ -36,7 +37,14 @@ function App() {
       //find index of contact==input contact
       //if(index !== -1) return
       //else setContact chala de 
+      let findIndex = contacts.findIndex((con) => con.contact === contact);
+      console.log(findIndex);
+      if(findIndex !== -1){
+        setIsErr(true);
+        return;
+      }
       setContacts([...contacts, { id: contacts.length + 1, name, contact }]);
+      setIsErr(false);
     }
     setName("");
     setId();
@@ -44,6 +52,7 @@ function App() {
   };
 
   const editContact = (contact) => {
+    setIsErr(false);
     setIsEditing(true);
     setId(contact.id);
     setName(contact.name);
@@ -97,9 +106,9 @@ function App() {
             onChange={(e) => setContact(e.target.value)}
             value={contact}
           />
-          <p id="emailHelp" class="form-text text-danger fs-6 font-italic">
+          {isErr && <p id="emailHelp" class="form-text text-danger fs-6 font-italic">
             Contact Number should not be duplicate
-          </p>
+          </p>}
         </div>
 
         <button type="submit" class="btn btn-success">
